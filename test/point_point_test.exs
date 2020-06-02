@@ -3,6 +3,14 @@ defmodule PointPointTest do
 
   @point %Geo.Point{coordinates: {3, -5}}
 
+  test "calculates angles" do
+    p0 = %Geo.Point{coordinates: {0, 0}}
+
+    assert Topo.angle(p0, %Geo.Point{coordinates: {0, 1}}) == :math.pi() / 2
+    assert Topo.angle(p0, %Geo.Point{coordinates: {1, 0}}) == 0.0
+    assert Topo.angle(p0, %Geo.Point{coordinates: {-1, 0}}) == :math.pi()
+  end
+
   test "point should intersect itself" do
     assert Topo.intersects?(@point, @point)
   end

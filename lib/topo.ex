@@ -3,6 +3,7 @@ defmodule Topo do
   alias Topo.Contains
   alias Topo.Cleaner
   alias Topo.Distance
+  alias Topo.Angle
 
   @moduledoc ~S"""
   A Geometry library for Elixir that calculates relationships between two
@@ -164,6 +165,9 @@ defmodule Topo do
 
   @spec distance(geometry, geometry) :: float
   def distance(a, b), do: Distance.distance(Cleaner.clean(a), Cleaner.clean(b))
+
+  @spec angle(geometry, geometry) :: float
+  def angle(a, b), do: Angle.angle(Cleaner.clean(a), Cleaner.clean(b))
 
   @doc ~S"""
   Geometries **A** and **B** are equivalent and cover the exact

@@ -11,6 +11,7 @@ defmodule Topo.Distance do
           | %Geo.Polygon{}
           | %Geo.MultiPolygon{}
 
+  @spec distance(geo_struct, geo_struct) :: float
   def distance(%Geo.LineString{} = a, %Geo.Point{} = b),
     do: PointLine.distance(a.coordinates, b.coordinates)
 
