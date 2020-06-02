@@ -2,6 +2,7 @@ defmodule Topo do
   alias Topo.Intersects
   alias Topo.Contains
   alias Topo.Cleaner
+  alias Topo.Distance
 
   @moduledoc ~S"""
   A Geometry library for Elixir that calculates relationships between two
@@ -160,6 +161,9 @@ defmodule Topo do
   """
   @spec within?(geometry, geometry) :: boolean
   def within?(a, b), do: Contains.contains?(Cleaner.clean(b), Cleaner.clean(a))
+
+  @spec distance(geometry, geometry) :: float
+  def distance(a, b), do: Distance.distance(Cleaner.clean(a), Cleaner.clean(b))
 
   @doc ~S"""
   Geometries **A** and **B** are equivalent and cover the exact

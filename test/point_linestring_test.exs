@@ -2,6 +2,7 @@ defmodule PointLineStringTest do
   use ExUnit.Case
 
   @point %Geo.Point{coordinates: {14, 18}}
+  @point2 %Geo.Point{coordinates: {14, 19}}
   @linestring %Geo.LineString{
     coordinates: [{4, 2}, {4, 4}, {10, 10}, {15, 10}, {20, 12}, {8, 24}, {12, 24}]
   }
@@ -11,6 +12,11 @@ defmodule PointLineStringTest do
       [{1, 3}, {2, -1}, {0, -1}, {1, 3}]
     ]
   }
+
+  test "calculates distance between point and linestring" do
+    assert Topo.distance(@point, @linestring) == 0
+    assert Topo.distance(@point2, @linestring) == 0.7071067811865476
+  end
 
   test "point should intersect a linestring that it lies on" do
     assert Topo.intersects?(@point, @linestring)
