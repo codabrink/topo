@@ -11,5 +11,5 @@ defmodule Topo.Translate do
   def x_translate(%Geo.Point{} = a, dx, angle), do: Point.x_translate(a, dx, angle)
 
   @spec y_translate(geo_struct, float, float) :: geo_struct
-  def y_translate(%Geo.Point{} = a, dy, angle), do: Point.translate(a, dy, angle)
+  def y_translate(%Geo.Point{} = a, dy, angle), do: Point.y_translate(a, dy, angle)
 end

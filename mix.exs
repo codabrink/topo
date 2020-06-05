@@ -23,6 +23,7 @@ defmodule Topo.Mixfile do
   defp deps do
     [
       {:geo, "~> 3.1"},
+      {:math, "~> 0.5.0"},
       {:seg_seg, "~> 0.1"},
       {:vector, "~> 1.0"},
       {:poison, "~> 3.0", only: [:test, :dev]},
