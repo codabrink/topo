@@ -15,6 +15,11 @@ defmodule Topo.Util do
     cross(a, b, c) == 0
   end
 
+  @spec side(point, point, point) :: number
+  def side({ax, ay}, {bx, by}, {px, py}) do
+    (px - ax) * (by - ay) - (py - ay) * (bx - ax)
+  end
+
   @spec between?(point, point, point) :: boolean
   def between?({ax, ay}, {bx, by}, {px, py})
       when ax == bx and ay == by and (px != ax and py != ay),

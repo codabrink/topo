@@ -5,6 +5,7 @@ defmodule Topo do
   alias Topo.Distance
   alias Topo.Angle
   alias Topo.Translate
+  alias Topo.Common
 
   @moduledoc ~S"""
   A Geometry library for Elixir that calculates relationships between two
@@ -178,6 +179,8 @@ defmodule Topo do
 
   @spec y_translate(geometry, float, float) :: geometry
   def y_translate(p, dy, angle), do: Translate.y_translate(Cleaner.clean(p), dy, angle)
+
+  def side(a, b), do: Common.side(Cleaner.clean(a), Cleaner.clean(b))
 
   @doc ~S"""
   Geometries **A** and **B** are equivalent and cover the exact

@@ -13,6 +13,10 @@ defmodule Topo.PointLine do
     end
   end
 
+  def side([a, b], p) do
+    Topo.Util.side(a, b, p)
+  end
+
   def distance([], _), do: nil
   def distance([_], _), do: nil
 

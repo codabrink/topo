@@ -13,6 +13,17 @@ defmodule PointLineStringTest do
     ]
   }
 
+  test "calculates side" do
+    line = %Geo.LineString{coordinates: [{0, 0}, {10, 0}]}
+    p1 = %Geo.Point{coordinates: {1, 1}}
+    p2 = %Geo.Point{coordinates: {1, -1}}
+    p3 = %Geo.Point{coordinates: {1, 0}}
+
+    assert Topo.side(line, p1) < 0
+    assert Topo.side(line, p2) > 0
+    assert Topo.side(line, p3) === 0
+  end
+
   test "calculates distance between point and linestring" do
     assert Topo.distance(@point, @linestring) == 0
     assert Topo.distance(@point2, @linestring) == 0.7071067811865476
