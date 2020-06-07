@@ -8,6 +8,14 @@ defmodule LineStringPolygonTest do
   @polygon %Geo.Polygon{coordinates: [@exterior]}
   @polygon_with_hole %Geo.Polygon{coordinates: [@exterior, @hole]}
 
+  test "linestring distance" do
+    l1 = %Geo.LineString{coordinates: [{0, 0}, {1, 0}]}
+    l2 = %Geo.LineString{coordinates: [{3, 0}, {3, 10}]}
+
+    assert Topo.distance(@hole_linestring, @linestring) === 1.0
+    assert Topo.distance(l1, l2) === 2.0
+  end
+
   test "polygon should intersect its own exterior linear ring" do
     assert Topo.intersects?(@polygon, @linestring)
     assert Topo.intersects?(@linestring, @polygon)
