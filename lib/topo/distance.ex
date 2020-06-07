@@ -2,6 +2,7 @@ defmodule Topo.Distance do
   @moduledoc false
 
   alias Topo.PointLine
+  alias Topo.Intersects
 
   @type geo_struct ::
           %Geo.Point{}
@@ -19,13 +20,18 @@ defmodule Topo.Distance do
 
   def distance(%Geo.LineString{} = a, %Geo.LineString{} = b) do
     cond do
-      Topo.intersects?(a, b) ->
-        0
+      Intersects.intersects?(a, b) ->
+        0.0
 
       true ->
-        Enum.reduce(a.coordinates, fn p, closest ->
-          min(closest, PointLine.distance(b.coordinates, p))
-        end)
+        min(
+          Enum.reduce(a.coordinates, fn p, closest ->
+            min(closest, PointLine.distance(b.coordinates, p))
+          end),
+          Enum.reduce(b.coordinates, fn p, closest ->
+            min(closest, PointLine.distance(a.coordinates, p))
+          end)
+        )
     end
   end
 end

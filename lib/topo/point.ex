@@ -1,22 +1,25 @@
 defmodule Topo.Point do
   @half_pi :math.pi() / 2
 
-  def translate(%Geo.Point{} = p, length, angle) do
+  @spec translate(%Geo.Point{}, float, float) :: %Geo.Point{}
+  def translate(%Geo.Point{} = p, len, angle) do
     %{coordinates: {px, py}} = p
-    dy = :math.sin(angle) * length
-    dx = :math.cos(angle) * length
-    %{p | coordinates: {px + dx, py + dy}}
+    dy = :math.sin(angle) * len
+    dx = :math.cos(angle) * len
+    %Geo.Point{p | coordinates: {px + dx, py + dy}}
   end
 
+  @spec x_translate(%Geo.Point{}, float, float) :: %Geo.Point{}
   def x_translate(%Geo.Point{} = p, dx, angle \\ 0.0) do
     %{coordinates: {px, py}} = p
     dy = :math.tan(angle) * dx
-    %{p | coordinates: {px + dx, py + dy}}
+    %Geo.Point{p | coordinates: {px + dx, py + dy}}
   end
 
+  @spec y_translate(%Geo.Point{}, float, float) :: %Geo.Point{}
   def y_translate(%Geo.Point{} = p, dy, angle \\ @half_pi) do
     %{coordinates: {px, py}} = p
     dx = dy / :math.tan(angle)
-    %{p | coordinates: {px + dx, py + dy}}
+    %Geo.Point{p | coordinates: {px + dx, py + dy}}
   end
 end
